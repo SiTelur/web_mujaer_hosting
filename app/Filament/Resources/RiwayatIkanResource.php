@@ -4,12 +4,11 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\RiwayatIkanResource\Pages;
 use App\Models\Ikan;
-use Filament\Forms\Form;
+use Filament\Forms\Components\DatePicker;
 use Filament\Resources\Resource;
 use Filament\Tables;
-use Filament\Tables\Table;
 use Filament\Tables\Filters\Filter;
-use Filament\Forms\Components\DatePicker;
+use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 
 class RiwayatIkanResource extends Resource
@@ -18,7 +17,9 @@ class RiwayatIkanResource extends Resource
 
     // Ganti nama menu dan ikon
     protected static ?string $navigationIcon = 'heroicon-o-clock';
+
     protected static ?string $navigationLabel = 'Riwayat Deteksi';
+
     protected static ?string $pluralModelLabel = 'Riwayat Data Ikan';
 
     // MATIKAN FITUR TAMBAH DATA (Sesuai permintaan dosen)
@@ -47,8 +48,8 @@ class RiwayatIkanResource extends Resource
                         default => 'gray',
                     }),
 
-                Tables\Columns\TextColumn::make('berat')->label('Berat')->suffix(' Kg'),
-                Tables\Columns\TextColumn::make('ukuran')->label('Ukuran')->suffix(' cm'),
+                Tables\Columns\TextColumn::make('berat')->label('Berat'),
+                Tables\Columns\TextColumn::make('ukuran')->label('Ukuran'),
             ])
             // Urutkan dari data yang paling baru masuk (teratas)
             ->defaultSort('created_at', 'desc')
@@ -70,7 +71,7 @@ class RiwayatIkanResource extends Resource
                                 $data['sampai_tanggal'],
                                 fn (Builder $query, $date): Builder => $query->whereDate('created_at', '<=', $date),
                             );
-                    })
+                    }),
             ])
             ->actions([
                 // Kosongkan agar tidak ada tombol Edit/Delete per baris
