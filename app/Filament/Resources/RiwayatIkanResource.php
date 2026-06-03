@@ -48,8 +48,8 @@ class RiwayatIkanResource extends Resource
                         default => 'gray',
                     }),
 
-                Tables\Columns\TextColumn::make('berat')->label('Berat'),
-                Tables\Columns\TextColumn::make('ukuran')->label('Ukuran'),
+                Tables\Columns\TextColumn::make('berat')->label('Berat')->suffix(' gram'),
+                Tables\Columns\TextColumn::make('ukuran')->label('Ukuran (cm)'),
             ])
             // Urutkan dari data yang paling baru masuk (teratas)
             ->defaultSort('created_at', 'desc')

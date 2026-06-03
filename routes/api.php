@@ -1,8 +1,8 @@
 <?php
 
+use App\Models\Ikan;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Route;
-use App\Models\Ikan; // <-- Rahasianya ada di sini, pakai nama asli file-nya
+use Illuminate\Support\Facades\Route; // <-- Rahasianya ada di sini, pakai nama asli file-nya
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
@@ -17,14 +17,14 @@ Route::post('/terima-data-ikan', function (Request $request) {
 
     // 2. Masukkan ke Model Ikan secara dinamis
     Ikan::create([
-        'kelas'  => $grade,
-        'ukuran' => $lebar . ' cm',
-        'berat'  => $berat . ' kg', // <-- Menggantikan '-' dengan berat riil (misal ditambah satuan kg atau gram)
-        'hasil'  => $grade,
+        'kelas' => $grade,
+        'ukuran' => $lebar,
+        'berat' => $berat, // <-- Menggantikan '-' dengan berat riil (misal ditambah satuan kg atau gram)
+        'hasil' => $grade,
     ]);
 
     return response()->json([
         'status' => 'SUKSES',
-        'pesan' => 'Mantap! Data Ikan ' . $grade . ' dengan berat ' . $berat . ' kg berhasil disimpan secara real-time!'
+        'pesan' => 'Mantap! Data Ikan '.$grade.' dengan berat '.$berat.' g berhasil disimpan secara real-time!',
     ]);
 });
